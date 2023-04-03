@@ -35,6 +35,8 @@ if ((millis() - button_pressed_time) > button_delay) {
 
 (Digital -> Debounce 참조)
 
+<hr/>
+
 **2) 값 = millis()**
 
 ```
