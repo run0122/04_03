@@ -137,57 +137,98 @@
 //   }
 // }
 
-// 8. millis로 다중 작업하기
+// 8. millis로 다중 작업하기 (하나는 스위치 꾹누르기 & 하나는 가변저항 밝기 조절)
 
-const int t1_LED = 13;
-unsigned int on_off = 0;
+// const int t1_LED = 13;
+// // unsigned int on_off = 0;
 
-const int t2_LED = 11;
-unsigned int t_high = 0;
+// const int t2_LED = 11;
+// // unsigned int t_high = 0;
 
-unsigned long t1_prev = 0;
-const unsigned long t1_delay = 500;
+// // unsigned long t1_prev = 0;
+// // const unsigned long t1_delay = 500;
 
-unsigned long t2_prev = 0;
-const unsigned long t2_delay = 1000;
+// unsigned long t2_prev = 0;
+// const unsigned long t2_delay = 1000;
 
-const int buttonPin = 2;
-const int analogPin = A0;
+// const int buttonPin = 2;
+// const int analogPin = A0;
 
-int buttonState = 0;
+// const unsigned long button_delay = 2000;
+// unsigned long button_pressed_time = 0;
+
+// int last_buttonState = LOW;
+// int buttonState = LOW;
+// int ledState = LOW;
+
+// void setup() {
+//   pinMode(t1_LED, OUTPUT);
+//   pinMode(buttonPin, INPUT);
+//   Serial.begin(115200);
+// }
+
+// void loop() {
+//   int reading = digitalRead(buttonPin);
+//   int sensorInput = analogRead(analogPin);
+
+  // if (reading != last_buttonState) {
+  //   button_pressed_time = millis();
+  // }
+
+  // if ((millis() - button_pressed_time) > button_delay) {
+  //   if (reading != buttonState) {
+  //     buttonState = reading;
+
+  //     if (buttonState == HIGH) {
+  //       ledState = !ledState;
+  //     }
+  //   }
+  // }
+//   digitalWrite(t1_LED, ledState);
+
+//   last_buttonState = reading;
+
+//   unsigned long t2_now = millis();
+//   if (t2_now - t2_prev >= t2_delay / 2) {
+//     analogWrite(t2_LED, sensorInput / 4);
+//   } else if (t2_now - t2_prev < t2_delay / 2) {
+//     analogWrite(t2_LED, 0);
+//   }
+//   if (t2_now - t2_prev >= t2_delay) {
+//     t2_prev = t2_now;
+//   }
+// }
+
+// 9. 선생님 코드
+
+const int switchPin = 2;
+const int led = 13;
+
+long startTime;
+long duration;
+long longpress = 2000;
 
 void setup() {
-  pinMode(t1_LED, OUTPUT);
-  pinMode(buttonPin, INPUT);
-  Serial.begin(115200);
+  pinMode(switchPin, INPUT);
+  pinMode(led, OUTPUT);
+  Serial.begin(9600);
 }
 
 void loop() {
-  buttonState = digitalRead(buttonPin);
-  int sensorInput = analogRead(analogPin);
-
-  unsigned long t1_now = millis();
-
-  if (buttonState == HIGH) {
-    if (t1_now - t1_prev >= t1_delay) {
-      t1_prev = t1_now;
-
-      on_off++;
-      if (on_off > 1) on_off = 0;
-      digitalWrite(t1_LED, on_off);
+  if(digitalRead(switchPin) == LOW)
+  {
+    startTime = millis();
+    while(digitalRead(switchPin) == LOW);
+    long duration = millis() - startTime;
+    Serial.println(duration);
+    if (duration > longpress){
+      digitalWrite(led, HIGH);
+    }
+    else 
+    {
+      digitalWrite(led, LOW);
     }
   }
+  // put your main code here, to run repeatedly:
 
-  unsigned long t2_now = millis();
-  if (t2_now - t2_prev >= t2_delay / 2) {
-    analogWrite(t2_LED, sensorInput / 4);
-  }
-  else if (t2_now - t2_prev < t2_delay /2){
-    analogWrite(t2_LED, 0);
-  }
-  if (t2_now - t2_prev >= t2_delay) {
-    t2_prev = t2_now;
-    // analogWrite(t2_LED, 0);
-  }
-  Serial.println(t2_now - t2_prev);
 }
