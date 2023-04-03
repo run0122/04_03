@@ -31,7 +31,9 @@ if ((millis() - button_pressed_time) > button_delay) {
   }
 }
 ```
-이런 식으로 특정 시간을 millis()로 저장하여 작업이 수행된 시간을 재면서 작동할 수 있습니다.  (Digital -> Debounce 참조)
+이런 식으로 특정 시간을 millis()로 저장하여 작업이 수행된 시간을 재면서 작동할 수 있습니다. 
+
+(Digital -> Debounce 참조)
 
 2) 값 = millis()
 
@@ -41,6 +43,8 @@ if (t_now - t_prev >= t_delay) {
   t_prev = t_now;
 }
 ```
-이런 식으로 loop를 돌면서 증가하는 t_now값과, delay가 지날때마다 초기화되는 prev 값을 비교하여 반복적인 작업 수행이 가능합니다.  (Basic -> BlinkWithoutDelay 참조)
+이런 식으로 loop를 돌면서 증가하는 t_now값과, delay가 지날때마다 초기화되는 prev 값을 비교하여 반복적인 작업 수행이 가능합니다. 
+
+(Basic -> BlinkWithoutDelay 참조)
 
 <hr/>
