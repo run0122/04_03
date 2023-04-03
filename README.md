@@ -14,7 +14,7 @@ NDelayFunc : NDelayFunc 사용자 정의 라이브러리 만들기
 
 millis() 함수는 크게 2가지 방식으로 사용됩니다.
 
-1) millis() - 저장된 값
+**1) millis() - 저장된 값**
 
 ```
 if (reading != last_buttonState) {
@@ -35,7 +35,7 @@ if ((millis() - button_pressed_time) > button_delay) {
 
 (Digital -> Debounce 참조)
 
-2) 값 = millis()
+**2) 값 = millis()**
 
 ```
 t_now = millis();
